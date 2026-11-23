@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Birthday Surprise ♡</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #080807;
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+</style>
+</head>
+
+<body>
+<audio id="music" loop preload="auto">
+    <source src="Photograph.mp3" type="audio/mpeg">
+</audio>
+
+<iframe id="pageFrame" src="love.html" title="Birthday surprise"></iframe>
+<iframe id="pageFrame" src="mine.html" title="Birthday surprise"></iframe>
+
+
+<script>
+const music = document.getElementById("music");
+const pageFrame = document.getElementById("pageFrame");
+
+function sendMusicState() {
+    if (!pageFrame.contentWindow) return;
+
+    pageFrame.contentWindow.postMessage({
+        type: "MUSIC_STATE",
+        playing: !music.paused
+    }, "*");
+}
+
+async function startMusic() {
+    try {
+        await music.play();
+    } catch (error) {
+        console.log("Music playback could not start:", error);
+    }
+
+    sendMusicState();
+}
+
+function toggleMusic() {
+    if (music.paused) {
+        startMusic();
+    } else {
+        music.pause();
+        sendMusicState();
+    }
+}
+
+window.addEventListener("message", function(event) {
+   
+    if (event.source !== pageFrame.contentWindow) return;
+
+    if (event.data === "OPEN_MINE") {
+        pageFrame.src = "mine.html";
+    } else if (event.data === "OPEN_LOVE") {
+        pageFrame.src = "love.html";
+    } else if (event.data === "PLAY_MUSIC") {
+        if (music.paused) startMusic();
+    } else if (event.data === "TOGGLE_MUSIC") {
+        toggleMusic();
+    }
+});
+
+pageFrame.addEventListener("load", sendMusicState);
+</script>
+</body>
+</html>

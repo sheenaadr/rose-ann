@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Love</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #080807;
+    color: #f8edcf;
+    font-family: Georgia, serif;
+}
+
+button {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+    background: radial-gradient(circle at center, #352912 0%, #15120b 45%, #080807 80%);
+}
+
+.top-label {
+    margin-bottom: 20px;
+    color: #d8b45d;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+h1 {
+    color: #e9cb83;
+    font-size: 40px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px #b38a35;
+}
+
+.name {
+    margin-top: 12px;
+    color: #fff0c6;
+    font-size: 38px;
+    font-style: italic;
+    text-shadow: 0 0 15px #d6ad51;
+}
+
+.subtitle {
+    margin-top: 18px;
+    color: #c8b27c;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.heart {
+    position: relative;
+    width: 75px;
+    height: 75px;
+    margin: 75px auto 55px;
+    border: 0;
+    background: #c99b36;
+    transform: rotate(-45deg);
+    animation: heartbeat 1.3s infinite;
+    box-shadow: 0 0 25px #d6ad51, 0 0 55px #a77a25;
+}
+
+.heart::before,
+.heart::after {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #c99b36;
+    content: "";
+}
+
+.heart::before {
+    top: -37px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 37px;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.18); }
+}
+
+.click-text {
+    color: #d8b45d;
+    font-size: 12px;
+    letter-spacing: 3px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.4; }
+}
+
+.sparkle {
+    position: fixed;
+    bottom: -30px;
+    z-index: 1;
+    color: #e9c66f;
+    font-size: 20px;
+    pointer-events: none;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+
+.gallery {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow-y: auto;
+    padding: 70px 15px 40px;
+    background: rgba(8, 8, 7, 0.98);
+}
+
+.gallery.show {
+    display: block;
+}
+
+.gallery-content {
+    max-width: 650px;
+    margin: auto;
+    text-align: center;
+    animation: appear 0.6s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.gallery-title,
+.section-title {
+    margin-bottom: 12px;
+    color: #e9cb83;
+    letter-spacing: 3px;
+}
+
+.gallery-title { font-size: 24px; }
+
+.description {
+    margin-bottom: 30px;
+    color: #b9a77d;
+    font-size: 13px;
+}
+
+.collage-title {
+    margin-bottom: 20px;
+    color: #e9cb83;
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+
+.collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+    padding: 12px;
+    border: 1px solid #a98236;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #241e11, #0c0b08);
+    box-shadow: 0 0 25px rgba(201, 155, 54, 0.15);
+}
+
+.collage img {
+    width: 100%;
+    height: 180px;
+    border: 2px solid #b38a35;
+    border-radius: 7px;
+    object-fit: cover;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.photo {
+    width: 100%;
+    height: 380px;
+    max-height: 420px;
+    border: 3px solid #c49a45;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(201, 155, 54, 0.3);
+}
+
+.message {
+    margin-top: 20px;
+    padding: 22px;
+    border: 1px solid #a98236;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #241e11, #12100b);
+    line-height: 1.8;
+}
+
+.message h3 {
+    margin-bottom: 12px;
+    color: #e9cb83;
+    font-size: 19px;
+}
+
+.message p {
+    color: #e7d9b7;
+    font-size: 14px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.gold-btn {
+    padding: 12px 22px;
+    border: 1px solid #f3d58a;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #d6b15d, #987027);
+    color: #100e09;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.gold-btn:hover {
+    transform: scale(1.05);
+    background: #f4d58b;
+}
+
+.counter {
+    color: #d6b15d;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.cake-section {
+    display: none;
+    margin-top: 50px;
+    padding: 25px 15px;
+    border: 1px solid #a98236;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #241e11, #100e09);
+    animation: appear 0.8s ease;
+}
+
+.cake-section.show { display: block; }
+
+.cake-section h2 {
+    margin-bottom: 12px;
+    color: #e9cb83;
+    letter-spacing: 2px;
+}
+
+.cake-message {
+    color: #e8d7ae;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.cake {
+    position: relative;
+    width: 180px;
+    height: 170px;
+    margin: 40px auto 25px;
+}
+
+.cake-base {
+    position: absolute;
+    bottom: 0;
+    width: 180px;
+    height: 80px;
+    border-radius: 10px 10px 18px 18px;
+    background: linear-gradient(135deg, #b38a35, #f0d58b, #96702b);
+    box-shadow: 0 0 25px rgba(218, 176, 80, 0.35);
+}
+
+.cake-middle {
+    position: absolute;
+    bottom: 70px;
+    left: 10px;
+    width: 160px;
+    height: 45px;
+    border-radius: 50%;
+    background: #e8d3a0;
+}
+
+.cake-top {
+    position: absolute;
+    bottom: 93px;
+    left: 10px;
+    width: 160px;
+    height: 28px;
+    border-radius: 50%;
+    background: #fff0c6;
+}
+
+.candle {
+    position: absolute;
+    bottom: 117px;
+    left: 84px;
+    z-index: 2;
+    width: 12px;
+    height: 42px;
+    background: repeating-linear-gradient(45deg, #fff0c6, #fff0c6 5px, #b38a35 5px, #b38a35 10px);
+}
+
+.flame {
+    position: absolute;
+    top: -20px;
+    left: 1px;
+    width: 10px;
+    height: 18px;
+    border-radius: 50% 50% 50% 0;
+    background: #ffd76b;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 15px #ffb72e;
+    animation: flame 0.7s infinite alternate;
+}
+
+@keyframes flame {
+    to { transform: rotate(-35deg) scale(1.2); }
+}
+
+.letter {
+    display: none;
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f6e7c3, #dfc18a);
+    color: #34250d;
+    text-align: left;
+    line-height: 1.9;
+    box-shadow: 0 0 25px rgba(218, 176, 80, 0.3);
+    animation: appear 0.7s ease;
+}
+
+.letter.show { display: block; }
+
+.letter h2 {
+    margin-bottom: 20px;
+    color: #74521e;
+    text-align: center;
+    font-style: italic;
+}
+
+.letter p {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.signature {
+    margin-top: 25px;
+    color: #74521e;
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.close {
+    position: fixed;
+    top: 15px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #b38a35;
+    border-radius: 50%;
+    background: transparent;
+    color: #e9cb83;
+    font-size: 25px;
+}
+
+.music-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 15;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #f3d58a;
+    border-radius: 50%;
+    background: #b38a35;
+    color: #100e09;
+    font-size: 20px;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 28px; letter-spacing: 3px; }
+    .name { font-size: 32px; }
+    .gallery-title { font-size: 20px; }
+    .collage img { height: 140px; }
+    .photo { height: 310px; }
+}
+</style>
+</head>
+
+<body>
+<div class="sparkle" style="left:10%;animation-delay:0s">✦</div>
+<div class="sparkle" style="left:30%;animation-delay:2s">✧</div>
+<div class="sparkle" style="left:50%;animation-delay:1s">✦</div>
+<div class="sparkle" style="left:75%;animation-delay:3s">✧</div>
+<div class="sparkle" style="left:90%;animation-delay:4s">✦</div>
+
+<main class="container">
+    <p class="top-label">A SPECIAL CELEBRATION</p>
+    <h1>HAPPY BIRTHDAY</h1>
+    <div class="name">Love ♡</div>
+    <p class="subtitle">YOU DESERVE ALL THE HAPPINESS</p>
+    <button class="heart" type="button" aria-label="Open your surprise" onclick="openGallery()"></button>
+    <p class="click-text">✦ CLICK THE HEART TO OPEN YOUR SURPRISE ✦</p>
+</main>
+
+<section class="gallery" id="gallery" aria-label="Birthday memories">
+    <button class="close" type="button" aria-label="Close gallery" onclick="closeGallery()">×</button>
+
+    <div class="gallery-content">
+        <h2 class="gallery-title">OUR BEAUTIFUL MEMORIES</h2>
+        <p class="description">Ten pictures, countless beautiful memories.</p>
+
+        <h3 class="collage-title">A LITTLE COLLECTION OF US ♡</h3>
+
+        <div class="collage">
+            <img src="memo1.jpg" alt="Memory 1">
+            <img src="memo2.jpg" alt="Memory 2">
+            <img src="memo3.jpg" alt="Memory 3">
+            <img src="memo4.jpg" alt="Memory 4">
+            <img src="memo5.jpg" alt="Memory 5">
+            <img src="memo6.jpg" alt="Memory 6">
+            <img src="memo7.jpg" alt="Memory 7">
+            <img src="memo8.jpg" alt="Memory 8">
+            <img src="memo9.jpg" alt="Memory 9">
+            <img src="memo10.jpg" alt="Memory 10">
+        </div>
+
+        <h2 class="section-title">EVERY PICTURE HAS A STORY</h2>
+        <img src="memo1.jpg" class="photo" id="photo" alt="Our memory">
+
+        <div class="message">
+            <h3 id="messageTitle">My Favorite Person ♡</h3>
+            <p id="messageText">Every moment with you is a beautiful memory that I will always treasure.</p>
+        </div>
+
+        <div class="buttons">
+            <button class="gold-btn" type="button" onclick="previousPhoto()">❮ Previous</button>
+            <button class="gold-btn" type="button" onclick="nextPhoto()">Next ❯</button>
+        </div>
+
+        <p class="counter" id="counter">MEMORY 1 OF 10</p>
+
+        <section class="cake-section" id="cakeSection">
+            <h2>ONE MORE SURPRISE, LOVE! ♡</h2>
+            <p class="cake-message">
+                Here's a little birthday cake just for you!
+                Make a wish and enjoy your special day. 🎂<br>
+                I LOVE YOU ALWAYS
+            </p>
+
+            <div class="cake" aria-hidden="true">
+                <div class="candle"><div class="flame"></div></div>
+                <div class="cake-top"></div>
+                <div class="cake-middle"></div>
+                <div class="cake-base"></div>
+            </div>
+
+            <p class="cake-message">May your life always be filled with love, happiness, and beautiful blessings.</p>
+            <button class="gold-btn" type="button" onclick="openLetter()" style="margin-top:25px">
+                💌 OPEN YOUR BIRTHDAY LETTER
+            </button>
+        </section>
+
+        <section class="letter" id="letter">
+            <h2>To My Dearest Love ♡</h2>
+            <p>Happy Birthday, Love!</p>
+            <p>Today is your special day, and I just want to remind you how much you mean to me. You are one of the most beautiful parts of my life, and I am grateful for every memory we have shared.</p>
+            <p>I hope this new chapter brings you happiness, good health, success, and countless reasons to smile. Never stop believing in yourself because you deserve all the wonderful things life has to offer.</p>
+            <p>Thank you for being you. Thank you for the laughter, the little moments, and the memories that make our story special. Even though pirmi kita tan pelyahan tali lng syempre tu tan stay for me and for Us.</p>
+            <p>No matter how many birthdays pass, I hope we continue making memories and celebrating more beautiful days together.</p>
+            <p>Enjoy your day, Love. You deserve to feel special today and every day.</p>
+            <div class="signature">With all my love,<br>Yours always ♡</div>
+            <p>But wait... there's more!!</p>
+            <p>scroll down pleas...</p>
+        </section>
+
+        <h2 style="margin:40px 0 15px;color:#e9cb83">ONE LAST SURPRISE FOR YOU ♡</h2>
+        <p style="margin-bottom:20px;color:#c8b27c">I still have something special prepared for you.</p>
+        <button class="gold-btn" type="button" onclick="openMoreSurprises()">💌 OPEN MORE SURPRISES</button>
+        <p style="margin-top:40px;color:#d6b15d">✦ MADE WITH LOVE JUST FOR YOU ✦</p>
+    </div>
+</section>
+
+<button class="music-btn" type="button" onclick="parent.postMessage('TOGGLE_MUSIC', '*')" id="musicButton" aria-label="Toggle music">♪</button>
+
+<script>
+const memories = [
+    { image: "pic1.jpg", title: "My Favorite Person ♡", message: "Every moment with you is a beautiful memory that I will always treasure. You make my ordinary days special." },
+    { image: "pic2.jpg", title: "Your Beautiful Smile", message: "Your smile is one of my favorite things. I hope life always gives you reasons to smile." },
+    { image: "pic3.jpg", title: "Your Gorgeous Smile", message: "Sometimes the simplest moments become the most unforgettable memories. I am glad I share them with you." },
+    { image: "pic4.jpg", title: "My Happiness", message: "Thank you for bringing happiness into my life. You make even ordinary days feel meaningful." },
+    { image: "pic5.jpg", title: "A Special Place in My Heart", message: "You have a special place in my heart that nobody else can ever replace. Always remember that." },
+    { image: "pic6.jpg", title: "More little Cute Moments with yachi", message: "In behalf of me yachi muna ali kuntigo na dtyu side kase .. I look forward to creating more adventures, laughter, and beautiful memories with you." },
+    { image: "pic7.jpg", title: "My Everyday Blessing", message: "Having you in my life is something I will always be thankful for. You are truly special to me." },
+    { image: "pic8.jpg", title: "Through Every Chapter", message: "Sorry blurry el pic dtyu aki kere lng io na no matter what,. Whatever life brings, I hope you know that we will continue to support each other and grow together." },
+    { image: "pic9.jpg", title: "My Precious Love", message: "I hope you never forget how appreciated, valued, and loved you are. You deserve the best." },
+    { image: "pic10.jpg", title: "Happy Birthday, Love!", message: "Here is to another year of your beautiful life. May your dreams come true and your heart stay happy. I love you!" }
+];
+
+let currentPhoto = 0;
+
+function openGallery() {
+    document.getElementById("gallery").classList.add("show");
+    showPhoto();
+}
+
+function closeGallery() {
+    document.getElementById("gallery").classList.remove("show");
+}
+
+function showPhoto() {
+    const memory = memories[currentPhoto];
+
+    document.getElementById("photo").src = memory.image;
+    document.getElementById("messageTitle").textContent = memory.title;
+    document.getElementById("messageText").textContent = memory.message;
+    document.getElementById("counter").textContent =
+        "MEMORY " + (currentPhoto + 1) + " OF " + memories.length;
+
+    const isLastPhoto = currentPhoto === memories.length - 1;
+    document.getElementById("cakeSection").classList.toggle("show", isLastPhoto);
+
+    if (!isLastPhoto) {
+        document.getElementById("letter").classList.remove("show");
+    }
+}
+
+function nextPhoto() {
+    currentPhoto = (currentPhoto + 1) % memories.length;
+    showPhoto();
+}
+
+function previousPhoto() {
+    currentPhoto = (currentPhoto - 1 + memories.length) % memories.length;
+    showPhoto();
+}
+
+function openLetter() {
+    document.getElementById("letter").classList.toggle("show");
+}
+
+function openMoreSurprises() {
+    parent.postMessage("OPEN_MINE", "*");
+}
+
+document.addEventListener("click", function(event) {
+    if (event.target.closest("#musicButton")) return;
+    parent.postMessage("PLAY_MUSIC", "*");
+});
+
+window.addEventListener("message", function(event) {
+    if (event.data && event.data.type === "MUSIC_STATE") {
+        document.getElementById("musicButton").textContent =
+            event.data.playing ? "Ⅱ" : "♪";
+    }
+});
+</script>
+</body>
+</html>
