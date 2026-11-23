@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Things For You ♡</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #080807;
+    color: #f8edcf;
+    font-family: Georgia, serif;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 50px 20px;
+    text-align: center;
+    background: radial-gradient(circle at center, #352912, #15120b 55%, #080807);
+}
+
+h1 {
+    margin-bottom: 15px;
+    color: #e9cb83;
+    font-size: 30px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #b38a35;
+}
+
+.subtitle {
+    margin-bottom: 45px;
+    color: #c8b27c;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.envelopes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.envelope-card {
+    width: 280px;
+    padding: 20px;
+    border: 1px solid #a98236;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #241e11, #100e09);
+    box-shadow: 0 0 25px rgba(201, 155, 54, 0.15);
+}
+
+.envelope {
+    position: relative;
+    width: 210px;
+    height: 145px;
+    margin: 25px auto;
+    border-radius: 5px;
+    background: #d8b66b;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s;
+}
+
+.envelope:hover {
+    transform: translateY(-8px);
+}
+
+.envelope::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    border-top: 85px solid #f1d99d;
+    border-right: 105px solid transparent;
+    border-left: 105px solid transparent;
+    content: "";
+    transform-origin: top;
+    transition: transform 0.5s;
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+}
+
+.envelope::after {
+    position: absolute;
+    top: 57px;
+    left: 87px;
+    z-index: 4;
+    color: #80501f;
+    font-size: 35px;
+    content: "♥";
+}
+
+.envelope-label {
+    margin-top: 15px;
+    color: #e9cb83;
+    font-size: 17px;
+}
+
+.envelope-desc {
+    margin-top: 10px;
+    color: #b9a77d;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.open-btn,
+.gold-btn {
+    padding: 11px 22px;
+    border: 1px solid #f3d58a;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #d6b15d, #987027);
+    color: #100e09;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.open-btn { margin-top: 18px; }
+
+.content {
+    display: none;
+    max-width: 650px;
+    margin: 35px auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #f6e7c3, #dfc18a);
+    color: #34250d;
+    text-align: left;
+    animation: appear 0.7s ease;
+}
+
+.content.show { display: block; }
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content h2 {
+    margin-bottom: 20px;
+    color: #74521e;
+    text-align: center;
+}
+
+.content p {
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.content img {
+    display: block;
+    width: 100%;
+    max-height: 400px;
+    margin: 20px auto;
+    border: 4px solid #b38a35;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.message-box {
+    margin-bottom: 15px;
+    padding: 17px;
+    border-left: 3px solid #a98236;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.35);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.signature {
+    margin-top: 25px;
+    color: #74521e;
+    text-align: right;
+    font-style: italic;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 23px;
+    border: 0;
+    border-radius: 25px;
+    background: #987027;
+    color: #fff0c6;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer {
+    margin-top: 55px;
+    color: #d6b15d;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.music-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 15;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #f3d58a;
+    border-radius: 50%;
+    background: #b38a35;
+    color: #100e09;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 24px; }
+    .envelope-card { width: 100%; max-width: 300px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+    <h1>A LITTLE SOMETHING FOR YOU ♡</h1>
+    <p class="subtitle">
+        I have two little envelopes prepared for you.<br>
+        Each one contains something from my heart.<br>
+        Open them whenever you're ready, Love.
+    </p>
+
+    <div class="envelopes">
+        <section class="envelope-card">
+            <div class="envelope" id="envelope1" onclick="openEnvelope(1)" aria-label="Open envelope 1"></div>
+            <h3 class="envelope-label">LITTLE MESSAGES ♡</h3>
+            <p class="envelope-desc">Ten little reminders of how special you are to me.</p>
+            <button class="open-btn" type="button" onclick="openEnvelope(1)">OPEN ENVELOPE 1 💌</button>
+        </section>
+
+        <section class="envelope-card">
+            <div class="envelope" id="envelope2" onclick="openEnvelope(2)" aria-label="Open envelope 2"></div>
+            <h3 class="envelope-label">LONG SWEET MESSAGE (LSM)</h3>
+            <p class="envelope-desc">A longer letter containing all the things I wish I could tell you.</p>
+            <button class="open-btn" type="button" onclick="openEnvelope(2)">OPEN ENVELOPE 2 💌</button>
+        </section>
+    </div>
+
+    <section class="content" id="content1">
+        <h2>10 LITTLE THINGS I WANT YOU TO KNOW ♡</h2>
+        <p style="text-align:center">A little collection of words, just for you.</p>
+        <img src="mine.jpg" alt="Our favorite picture together">
+
+        <div class="message-box"><b>My Favorite Enemy</b><br>You're always be my favorite enemy, you're always be my favorite person. Even when you annoy me, I wouldn't trade you for anyone else.</div>
+        <div class="message-box"><b>My Safe Place</b><br>No matter how stressful my day gets, talking to you somehow makes everything feel a little lighter.</div>
+        <div class="message-box"><b>Your Smile</b><br>I hope you never get tired of smiling. Your smile is one of the things I never want to lose.</div>
+        <div class="message-box"><b>My Favorite Person</b><br>Out of all the people in this world, you're still the person I want to share my random stories with.</div>
+        <div class="message-box"><b>Thank You</b><br>Thank you for staying, understanding, and making ordinary moments memorable.</div>
+        <div class="message-box"><b>Even on Difficult Days</b><br>We may not always have perfect days, but I hope we never stop choosing to understand each other.</div>
+        <div class="message-box"><b>My Best Friend</b><br>I love how I can be silly, weird, and completely myself around you.</div>
+        <div class="message-box"><b>More Adventures</b><br>I want more pictures, more laughter, more random conversations, and more beautiful memories with you.</div>
+        <div class="message-box"><b>You Are Enough</b><br>Never think that you are not enough. You're already special just by being you.</div>
+        <div class="message-box"><b>Always You</b><br>If I could choose again, I would still choose to meet you, know you, and create memories with you. Happy Birthday, my love!</div>
+
+        <div class="signature">Forever your favorite person ♡</div>
+
+        <p>Scroll up to open the next envelope 💌</p>
+
+    </section>
+
+    <section class="content" id="content2">
+        <h2>MY LONG SWEET MESSAGE ♡</h2>
+
+        <p>To my favorite person, my favorite enemy, and my favorite human being,</p>
+        <p>Happy Birthday, Love! I honestly don't know where to begin because there are so many things I want to tell you. But one thing is certain: I'm really grateful that you became part of my life.</p>
+        <p>I know we're not perfect. We have our own misunderstandings, little arguments, silly fights, and moments when we annoy each other. Sometimes we act like enemies, but deep down, you're still one of the people I never want to lose.</p>
+        <p>You're always be my favorite enemy, you're always be my favorite person. And honestly, I wouldn't want it any other way. You're the person I can laugh with, argue with, share random thoughts with, and make memories that I know I'll treasure for a long time.</p>
+        <p>I hope you know how proud I am of you. Even on days when you feel tired, uncertain, or think you're not doing enough, please remember that you're doing better than you think. You deserve patience, kindness, peace, and all the happiness this world can give.</p>
+        <p>I may not always find the perfect words to express how much you mean to me, and I may not always know the perfect thing to do, but I hope my little efforts remind you that you are loved and appreciated.</p>
+        <p>I want to celebrate more birthdays with you. I want more late-night conversations, random pictures, unexpected laughs, silly arguments, and moments that will someday become our favorite memories.</p>
+        <p>Please take care of yourself. Don't be too hard on yourself. Chase your dreams, believe in your abilities, and never forget that you have someone who genuinely wishes the best for you.</p>
+        <p>Thank you for being my favorite person. Thank you for being my happiness in ways you probably don't even realize. And thank you for giving me memories that I will always keep close to my heart.</p>
+        <p>No matter how many times we tease each other, annoy each other, or disagree about the smallest things, I hope we always find our way back to understanding and loving each other.</p>
+        <p>Happy Birthday once again, Love. I hope this year gives you everything your heart has been quietly wishing for. You deserve beautiful things, beautiful opportunities, and beautiful days.</p>
+        <p>And if there's one thing I want you to remember after reading this letter, it's that I'm thankful for you. Not just today, but every single day.</p>
+        <p>I love you more than these words can explain. Here's to us and to all the memories we haven't made yet.</p>
+
+        <div class="signature">With all my love,<br>Your favorite enemy and favorite person ♡</div>
+    </section>
+
+   <a href="love.html" class="back-btn">
+    ← BACK TO BIRTHDAY SURPRISE
+   </a>
+
+    <p class="footer">MADE WITH LOVE, JUST FOR YOU ♡</p>
+</main>
+
+<button class="music-btn" id="musicButton" type="button" onclick="parent.postMessage('TOGGLE_MUSIC', '*')" aria-label="Toggle music">♪</button>
+
+<script>
+function openEnvelope(number) {
+    const content = document.getElementById("content" + number);
+    const envelope = document.getElementById("envelope" + number);
+    const willOpen = !content.classList.contains("show");
+
+    // Isara muna ang kabilang envelope para isang letter lang ang bukas.
+    document.querySelectorAll(".content").forEach(function(item) {
+        item.classList.remove("show");
+    });
+    document.querySelectorAll(".envelope").forEach(function(item) {
+        item.classList.remove("open");
+    });
+
+    if (willOpen) {
+        content.classList.add("show");
+        envelope.classList.add("open");
+
+        setTimeout(function() {
+            content.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 200);
+    }
+}
+
+document.addEventListener("click", function(event) {
+    if (event.target.closest("#musicButton")) return;
+    parent.postMessage("PLAY_MUSIC", "*");
+});
+
+window.addEventListener("message", function(event) {
+    if (event.data && event.data.type === "MUSIC_STATE") {
+        document.getElementById("musicButton").textContent =
+            event.data.playing ? "Ⅱ" : "♪";
+    }
+});
+</script>
+</body>
+</html>
